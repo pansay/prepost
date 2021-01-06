@@ -47,10 +47,19 @@
 <main>
   <h1>prePost</h1>
 
-  <div>
-    <label>markdown text input:</label><textarea bind:value={text}></textarea>
-    <label>HTML code output:</label><textarea bind:value={html}></textarea>
-    <label>rendered HTML output:</label><div>{@html html}</div>
+  <div class="columns">
+    <div class="column">
+      <label>markdown text input</label>
+      <textarea bind:value={text}></textarea>
+    </div>
+    <div class="column">
+      <label>HTML code output</label>
+      <textarea bind:value={html}></textarea>
+    </div>
+    <div class="column">
+      <label>rendered HTML output</label>
+      <div class="rendered">{@html html}</div>
+    </div>
 
   </div>
 
@@ -86,7 +95,41 @@
   main {
     text-align: center;
     padding: 1em;
-    max-width: 240px;
     margin: 0 auto;
+    width: 800px;
+  }
+
+  .columns {
+    clear: both;
+    float: left;
+    width: 100%;
+    height: 95%;
+    margin: 40px 0 0 0;
+  }
+
+  .column {
+    float: left;
+    width: 30%;
+    height: 400px;
+    margin-right: 5%;
+  }
+
+  .column:last-child {
+    margin-right: 0;
+  }
+
+  textarea {
+    width: 100%;
+    height: 100%;
+    border: 1px solid black;
+    font-size: .75em;
+  }
+
+  .rendered {
+    border: 1px solid black;
+    width: 100%;
+    height: 100%;
+    overflow: scroll;
+    font-size: .75em;
   }
 </style>
