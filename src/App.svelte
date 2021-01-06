@@ -1,4 +1,5 @@
 <script>
+  import FileSaver from 'file-saver';
   import prettyUrl from './pretty-url.js';
   import prettyFilename from './prettyFilename.js';
   let title = '';
@@ -14,6 +15,11 @@
     this.select();
     document.execCommand('copy');
     alert(`Copied '${this.value}' to clipboard!`);
+  }
+
+  const saveFile = function() {
+    var blob = new Blob(["Hello, world!"], {type: "text/plain;charset=utf-8"});
+    FileSaver.saveAs(blob, prettyFilenameFromTitleAndDate);
   }
 </script>
 
@@ -32,6 +38,9 @@
       bind:value={prettyFilenameFromTitleAndDate}
       on:click={copyOnClick}
       readonly>
+
+    <button
+      on:click={saveFile}>save file</button>
   </div>
 </main>
 
