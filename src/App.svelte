@@ -8,6 +8,12 @@
     return showDownConverter.makeHtml(markdownString);
   }
 
+  const getFirstLine = (text) => {
+    let index = text.indexOf("\n");
+    if (index === -1) index = undefined;
+    return text.substring(0, index);
+  }
+
   const copyOnClick = (element) => {
     element.select();
     document.execCommand('copy');
@@ -32,7 +38,9 @@
   const showDownConverter = new showdown.Converter();
 
   let title = '';
-  let text = '';
+  $: title = getFirstLine(text);
+
+  let text = "Title with spaces\n===\n\nParagraph with *bold*";
   let isoDate = new Date().toISOString().substring(0, 10);
 
   let prettyUrlFromTitle = '';
@@ -50,19 +58,6 @@
 </script>
 
 <main>
-  <h1>prePost</h1>
-
-  <div class="columns">
-
-    <div class="column-half">
-      <div>
-        <label>post date: </label><input type="date" bind:value={isoDate}>
-      </div>
-    </div>
-
-    <div class="column">
-      title
-    </div>
 
   <div class="columns">
 
@@ -108,29 +103,31 @@
       </p>
     </div>
 
+    <div class="column">
+      <label>post date: </label><input type="date" bind:value={isoDate}>
+
+      <label>title: </label><input bind:value={title}>
+
+      <label>pretty-url: </label><input bind:value={prettyUrlFromTitle}>
+
+      <label>filename: </label>
+      <input
+        type="text"
+        id="filename"
+        bind:value={prettyFilenameMarkdown}
+        readonly>
+
+      <p>
+        <button
+          on:click={copyFilenameToClipboard}>
+          copy filename to clipboard
+        </button>
+      </p>
+
+    </div>
+
   </div>
 
-  <div>
-
-    <label>title: </label><input bind:value={title}>
-
-    <label>pretty-url: </label><input bind:value={prettyUrlFromTitle}>
-
-    <label>filename: </label>
-    <input
-      type="text"
-      id="filename"
-      bind:value={prettyFilenameMarkdown}
-      readonly>
-
-    <p>
-      <button
-        on:click={copyFilenameToClipboard}>
-        copy filename to clipboard
-      </button>
-    </p>
-
-  </div>
 </main>
 
 <footer>
