@@ -75,3 +75,60 @@ input[readonly] {
   color: white;
 }
 
+main {
+  text-align: center;
+  padding: 1em;
+  margin: 0 auto;
+  width: 800px;
+}
+
+.columns {
+  clear: both;
+  float: left;
+  width: 100%;
+  height: 95%;
+  margin: 40px 0 0 0;
+}
+
+.column-half {
+  float: left;
+  width: 47.5%;
+  height: 400px;
+  margin-right: 5%;
+}
+
+.column-half:last-child {
+  margin-right: 0;
+}
+
+.column {
+  float: left;
+  width: 30%;
+  height: 400px;
+  margin-right: 5%;
+}
+
+.column:last-child {
+  margin-right: 0;
+}
+
+textarea {
+  width: 100%;
+  height: 100%;
+  border: 1px solid black;
+  font-size: .75em;
+}
+
+.rendered {
+  border: 1px solid black;
+  width: 100%;
+  height: 100%;
+  overflow: scroll;
+  font-size: .75em;
+  text-align: left;
+  padding: 0 10px;
+}
+
+label {
+  padding: 5px;
+}

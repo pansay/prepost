@@ -52,14 +52,22 @@
 <main>
   <h1>prePost</h1>
 
-  <div>
-    <label>post date: </label><input type="date" bind:value={isoDate}>
-  </div>
+  <div class="columns">
+
+    <div class="column-half">
+      <div>
+        <label>post date: </label><input type="date" bind:value={isoDate}>
+      </div>
+    </div>
+
+    <div class="column">
+      title
+    </div>
 
   <div class="columns">
 
     <div class="column">
-      <label>markdown text input</label>
+      <label>markdown text input<br>(title is first line)</label>
       <textarea bind:value={text}></textarea>
       <p>
         <button
@@ -74,7 +82,7 @@
     </div>
 
     <div class="column">
-      <label>HTML code output</label>
+      <label>HTML<br>code output</label>
       <textarea bind:value={html}></textarea>
 
       <p>
@@ -90,7 +98,7 @@
     </div>
 
     <div class="column">
-      <label>rendered HTML output</label>
+      <label>HTML<br>rendered output</label>
       <div class="rendered">{@html html}</div>
       <p>
         <button
@@ -130,46 +138,3 @@
     source code and documentation on GitHub
   </a>
 </footer>
-
-<style>
-  main {
-    text-align: center;
-    padding: 1em;
-    margin: 0 auto;
-    width: 800px;
-  }
-
-  .columns {
-    clear: both;
-    float: left;
-    width: 100%;
-    height: 95%;
-    margin: 40px 0 0 0;
-  }
-
-  .column {
-    float: left;
-    width: 30%;
-    height: 400px;
-    margin-right: 5%;
-  }
-
-  .column:last-child {
-    margin-right: 0;
-  }
-
-  textarea {
-    width: 100%;
-    height: 100%;
-    border: 1px solid black;
-    font-size: .75em;
-  }
-
-  .rendered {
-    border: 1px solid black;
-    width: 100%;
-    height: 100%;
-    overflow: scroll;
-    font-size: .75em;
-  }
-</style>
