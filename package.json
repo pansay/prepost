@@ -1,5 +1,5 @@
 {
-  "name": "svelte-app",
+  "name": "prePost",
   "version": "1.0.0",
   "scripts": {
     "build": "rollup -c && cp -r public/ docs/ && sed -i '' \"s/='\\//='/g\" docs/index.html",
@@ -18,6 +18,8 @@
   },
   "dependencies": {
     "file-saver": "^2.0.5",
+    "frenchify-rules": "git+https://github.com/pansay/frenchify-rules.git",
+    "showdown": "^1.9.1",
     "sirv-cli": "^1.0.0"
   }
 }
