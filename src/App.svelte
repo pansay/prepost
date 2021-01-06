@@ -98,7 +98,7 @@
       <p>
         <button
           on:click={copyToClipboard(html)}>
-          copy HTML source to clipboard
+          copy rendered HTML to clipboard
         </button>
       </p>
     </div>
