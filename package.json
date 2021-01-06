@@ -1,5 +1,7 @@
 {
   "name": "prePost",
+  "author": "pansay",
+  "license": "UNLICENSE",
   "version": "1.0.0",
   "scripts": {
     "build": "rollup -c && cp -r public/ docs/ && sed -i '' \"s/='\\//='/g\" docs/index.html",
