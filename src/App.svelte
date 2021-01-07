@@ -3,26 +3,21 @@
   import showdown from 'showdown';
   import prettyUrl from './lib/pretty-url.js';
   import prettyFilename from './lib/prettyFilename.js';
+  import selectRichText from './lib/selectRichText.js';
+  import { Frenchify, rules, languageRules } from 'frenchify-rules';
 
-  const selectRichText = (elementId) => {
-    const node = document.getElementById(elementId);
-    if (document.body.createTextRange) {
-        const range = document.body.createTextRange();
-        range.moveToElementText(node);
-        range.select();
-    } else if (window.getSelection) {
-        const selection = window.getSelection();
-        const range = document.createRange();
-        range.selectNodeContents(node);
-        selection.removeAllRanges();
-        selection.addRange(range);
-    } else {
-        console.warn("Could not select text in node: Unsupported browser.");
+  const applyConversions = (markdownString, isHelpersConversionActivated, typographyLanguage) => {
+    const rulesToApply = [];
+    if (typographyLanguage) {
+      rulesToApply
+        .push(languageRules
+          .find(language => language.id === typographyLanguage).rules);
     }
-    return node;
-  }
-
-  const convertMarkdown = (markdownString) => {
+    if (isHelpersConversionActivated) {
+      rulesToApply.push(rules);
+    }
+    const frenchify = new Frenchify(rulesToApply);
+    markdownString = frenchify.applyRules(markdownString);
     return showDownConverter.makeHtml(markdownString);
   }
 
@@ -68,15 +63,18 @@
 
   const saveFileHTML = (fileContent, fileName) => {
     var blob = new Blob([fileContent], {type: "text/html;charset=utf-8"});
-    FileSaver.saveAs(blob, fileName); // .partial.html file
+    FileSaver.saveAs(blob, fileName); // .partial.html file\
   }
 
   const showDownConverter = new showdown.Converter();
 
+  let isHelpersConversionActivated = false;
+  let typographyLanguage = null;
+
   let title = '';
   $: title = getFirstLine(text);
 
-  let text = "Title with spaces\n===\n\nParagraph with *bold*";
+  let text = 'Title with spaces\n===\n\nParagraph with *bold*, and a sentence -- with "quotes".';
   let isoDate = new Date().toISOString().substring(0, 10);
 
   let prettyUrlFromTitle = '';
@@ -89,7 +87,7 @@
   $: prettyFilenameHTML = prettyFilename(prettyUrlFromTitle, isoDate, 'partial.html');
 
   let html = '';
-  $: html = convertMarkdown(text);
+  $: html = applyConversions(text, isHelpersConversionActivated, typographyLanguage);
 
 </script>
 
@@ -172,6 +170,16 @@
 
     </div>
 
+  </div>
+
+  <div
+    class="options">
+    <strong>options</strong> typography
+    <label><input type="radio" bind:group={typographyLanguage} value={null}>none</label>
+    <label><input type="radio" bind:group={typographyLanguage} value="fr">French</label>
+    <label><input type="radio" bind:group={typographyLanguage} value="en">English</label>
+    <label><input type="radio" bind:group={typographyLanguage} value="es">Spanish</label>
+    <label><input type="checkbox" bind:checked={isHelpersConversionActivated}>helpers</label>
   </div>
 
 </main>
