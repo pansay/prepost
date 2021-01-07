@@ -174,11 +174,14 @@
 
   <div
     class="options">
-    <strong>options</strong> typography
+     typography
     <label><input type="radio" bind:group={typographyLanguage} value={null}>none</label>
     <label><input type="radio" bind:group={typographyLanguage} value="fr">French</label>
     <label><input type="radio" bind:group={typographyLanguage} value="en">English</label>
     <label><input type="radio" bind:group={typographyLanguage} value="es">Spanish</label>
+    <label><input type="radio" bind:group={typographyLanguage} value="es">German (Swiss Standard - WIP)</label>
+    <label><input type="radio" bind:group={typographyLanguage} value={null}>German (TODO)</label>
+    <br><br>
     <label><input type="checkbox" bind:checked={isHelpersConversionActivated}>helpers</label>
   </div>
 

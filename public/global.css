@@ -122,9 +122,15 @@ footer {
 
 input[type="checkbox"],
 input[type="radio"] {
-  margin: 5px;
+  position: absolute;
+  bottom: -5px;
+  left: 0;
+  display: inline-block;
 }
 
 .options label {
+  position: relative;
+  padding: 0 0 0 20px;
+  margin: 0 10px 0 0;
   display: inline-block;
 }
