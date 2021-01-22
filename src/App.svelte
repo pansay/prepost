@@ -32,6 +32,12 @@
     alert(`Copied\n\n${text}\n\nto clipboard!`);
   }
 
+  const copyPrettyUrlToClipboard = () => {
+    const element = document.getElementById('prettyUrl');
+    element.select();
+    copyOnClick(element.value);
+  }
+
   const copyFilenameToClipboard = () => {
     const element = document.getElementById('filename');
     element.select();
@@ -142,7 +148,18 @@
 
       <label>title: </label><input bind:value={title}>
 
-      <label>pretty-url: </label><input bind:value={prettyUrlFromTitle}>
+      <label>pretty-url: </label>
+      <input
+        type="text"
+        id="prettyUrl"
+        bind:value={prettyUrlFromTitle}>
+
+      <p>
+        <button
+          on:click={copyPrettyUrlToClipboard}>
+          copy pretty URL to clipboard
+        </button>
+      </p>
 
       <label>filename: </label>
       <input
